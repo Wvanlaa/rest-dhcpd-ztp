@@ -83,7 +83,7 @@ func BuildOptions(options interface{}) dhcp.Options {
 				val = []byte(net.ParseIP(fmt.Sprint(value)).To4())
 			}
 		} else {
-			val = []byte(fmt.Sprint(value))
+			val = optionValueToBytes(value)
 		}
 		dhcp_opt[dhcp.OptionCode(id)] = []byte(val)
 	}
