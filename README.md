@@ -1,5 +1,10 @@
 # REST DHCPD
 DHCP server controlled via REST endpoints.
+This is a patched version created by Vinted - https://github.com/vinted/rest-dhcpd.git.
+This version can be used with HPE Networking ZTP (tested on CX line) for adding Option 43 with SubOption 145 to provide the software image name.
+PATCH-NOTES.md holds details of how patch is done.
+
+/tools/optie43-hex.py is a simple script to generate the hex-value that needs to be added with the client DHCP record.
 
 ## Configuration
 
