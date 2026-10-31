@@ -2,3 +2,4 @@ rest-dhcpd-clients.json
 example.crt
 example.key
 cert.csr
+rest-dhcpd
