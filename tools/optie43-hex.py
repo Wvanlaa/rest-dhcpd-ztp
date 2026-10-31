@@ -1,26 +1,26 @@
 #!/usr/bin/env python3
-"""Genereer de hexwaarde voor DHCP optie 43 met sub-opties.
+"""Generate the hexadecimal value for DHCP option 43 with sub-options.
 
-Gebruik: ./optie43-hex.py 145 "http://10.10.10.1/ztp.cfg"
-         ./optie43-hex.py 144 "primary" 145 "http://10.10.10.1/ztp.cfg"
+Usage: ./optie43-hex.py 145 "ArubaOS-CX_10_13_1000.swi"
+       ./optie43-hex.py 144 "primary" 145 "ArubaOS-CX_10_13_1000.swi"
 """
 import sys
 
 args = sys.argv[1:]
 if not args or len(args) % 2:
-    sys.exit("Gebruik: optie43-hex.py <subcode> <waarde> [<subcode> <waarde> ...]")
+    sys.exit("Usage: optie43-hex.py <subcode> <value> [<subcode> <value> ...]")
 
 tlv = b""
 for i in range(0, len(args), 2):
     code = int(args[i])
     value = args[i + 1].encode("ascii")
     if not 0 <= code <= 255:
-        sys.exit(f"Sub-optiecode {code} valt buiten 0-255")
+        sys.exit(f"Sub-option code {code} is outside 0-255")
     if len(value) > 255:
-        sys.exit(f"Waarde voor sub-optie {code} is te lang ({len(value)} bytes)")
+        sys.exit(f"Value for sub-option {code} is too long ({len(value)} bytes)")
     tlv += bytes([code, len(value)]) + value
 
 if len(tlv) > 255:
-    sys.exit(f"Totale optie 43 is te lang ({len(tlv)} bytes)")
+    sys.exit(f"Total option 43 is too long ({len(tlv)} bytes)")
 
 print("0x" + tlv.hex())

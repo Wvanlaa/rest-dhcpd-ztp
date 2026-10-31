@@ -147,10 +147,10 @@ fails on the wire:
 
 | Check | Message |
 | --- | --- |
-| Arguments not in pairs | `Gebruik: optie43-hex.py <subcode> <waarde> …` |
-| Sub-option code outside 0–255 | `Sub-optiecode N valt buiten 0-255` |
-| A single value longer than 255 bytes | `Waarde voor sub-optie N is te lang` |
-| All sub-options together over 255 bytes | `Totale optie 43 is te lang` |
+| Arguments not in pairs | `Usage: optie43-hex.py <subcode> <value> ...` |
+| Sub-option code outside 0–255 | `Sub-option code N is outside 0-255` |
+| A single value longer than 255 bytes | `Value for sub-option N is too long` |
+| All sub-options together over 255 bytes | `Total option 43 is too long` |
 
 Values are encoded as ASCII. A non-ASCII character raises a `UnicodeEncodeError` — filenames
 for network boot should be plain ASCII anyway.
