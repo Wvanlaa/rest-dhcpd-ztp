@@ -98,6 +98,20 @@ curl http://127.0.0.1:6767/client/aa:bb:cc:dd:ee:ff -H "REST-DHCPD-Auth-Token: s
 ```
 curl  -X PUT http://127.0.0.1:6767/client/aa:bb:cc:dd:ee:ff -H "REST-DHCPD-Auth-Token: secretToken" -d '{"Hostname":"test4","IP":"192.168.13.17","Options":{"13":"option13"}}'
 ```
+##### HPE CX ZTP example
+
+Option 43 carries encapsulated sub-options, so its value is given as a hex string prefixed
+with `0x`. Sub-option 145 holds the firmware image filename the switch should fetch, as a
+path relative to the TFTP root.
+
+```
+curl -X PUT http://127.0.0.1:6767/client/aa:bb:cc:dd:ee:ff -H "REST-DHCPD-Auth-Token: secretToken" -d '{"Hostname":"sw-01","IP":"192.168.13.17","Options":{"66":"192.168.13.1","43":"0x911941727562614f532d43585f31305f31335f313030302e737769"}}'
+```
+
+Here option 66 points at the TFTP server and the option 43 value decodes to sub-option 145
+with the value `ArubaOS-CX_10_13_1000.swi`. Use `tools/optie43-hex.py` to generate the hex
+string; see [tools/optie43-hex.md](tools/optie43-hex.md) for details.
+
 ##### Delete client
 ```
 curl -X DELETE http://127.0.0.1:6767/client/aa:bb:cc:dd:ee:ff -H "REST-DHCPD-Auth-Token: secretToken"
